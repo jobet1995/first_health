@@ -26,6 +26,7 @@
             this.ajax = new AjaxManager(this.config);
             this.forms = new FormManager(this.ajax);
             this.theme = new ThemeManager();
+            this.swal = new SweetAlert2Manager();
             
             this.init();
         }
@@ -709,6 +710,190 @@
     }
 
     /**
+     * SweetAlert2 Manager - Beautiful alert modals
+     */
+    class SweetAlert2Manager {
+        constructor() {
+            this.defaultConfig = {
+                confirmButtonColor: 'hsl(199, 89%, 48%)',  // Primary color
+                cancelButtonColor: 'hsl(215, 16%, 47%)',   // Muted color
+                customClass: {
+                    popup: 'rounded-xl shadow-xl',
+                    title: 'text-2xl font-bold',
+                    htmlContainer: 'text-base',
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-outline'
+                }
+            };
+        }
+
+        /**
+         * Success alert
+         */
+        success(title, message = '', options = {}) {
+            return Swal.fire({
+                icon: 'success',
+                title: title,
+                text: message,
+                ...this.defaultConfig,
+                ...options
+            });
+        }
+
+        /**
+         * Error alert
+         */
+        error(title, message = '', options = {}) {
+            return Swal.fire({
+                icon: 'error',
+                title: title,
+                text: message,
+                ...this.defaultConfig,
+                ...options
+            });
+        }
+
+        /**
+         * Warning alert
+         */
+        warning(title, message = '', options = {}) {
+            return Swal.fire({
+                icon: 'warning',
+                title: title,
+                text: message,
+                ...this.defaultConfig,
+                ...options
+            });
+        }
+
+        /**
+         * Info alert
+         */
+        info(title, message = '', options = {}) {
+            return Swal.fire({
+                icon: 'info',
+                title: title,
+                text: message,
+                ...this.defaultConfig,
+                ...options
+            });
+        }
+
+        /**
+         * Confirmation dialog
+         */
+        async confirm(title, message = '', options = {}) {
+            const result = await Swal.fire({
+                icon: 'question',
+                title: title,
+                text: message,
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                ...this.defaultConfig,
+                ...options
+            });
+
+            return result.isConfirmed;
+        }
+
+        /**
+         * Delete confirmation
+         */
+        async confirmDelete(itemName = 'this item') {
+            const result = await Swal.fire({
+                icon: 'warning',
+                title: 'Are you sure?',
+                text: `Do you want to delete ${itemName}? This action cannot be undone.`,
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel',
+                confirmButtonColor: '#ef4444',
+                ...this.defaultConfig
+            });
+
+            return result.isConfirmed;
+        }
+
+        /**
+         * Toast notification (small popup)
+         */
+        toast(message, icon = 'success', options = {}) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
+            });
+
+            return Toast.fire({
+                icon: icon,
+                title: message,
+                ...options
+            });
+        }
+
+        /**
+         * Loading modal
+         */
+        loading(title = 'Loading...', message = 'Please wait') {
+            return Swal.fire({
+                title: title,
+                text: message,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+                ...this.defaultConfig
+            });
+        }
+
+        /**
+         * Close the current alert
+         */
+        close() {
+            Swal.close();
+        }
+
+        /**
+         * Input dialog
+         */
+        async input(title, options = {}) {
+            const result = await Swal.fire({
+                title: title,
+                input: 'text',
+                showCancelButton: true,
+                confirmButtonText: 'Submit',
+                cancelButtonText: 'Cancel',
+                ...this.defaultConfig,
+                ...options
+            });
+
+            if (result.isConfirmed) {
+                return result.value;
+            }
+            return null;
+        }
+
+        /**
+         * Custom HTML content
+         */
+        custom(options = {}) {
+            return Swal.fire({
+                ...this.defaultConfig,
+                ...options
+            });
+        }
+    }
+
+    /**
      * Initialize the application when DOM is ready
      */
     $(document).ready(() => {
@@ -716,3 +901,4 @@
     });
 
 })(jQuery);
+

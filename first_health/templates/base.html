@@ -25,6 +25,7 @@
 
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/first_health.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/sweetalert2.min.css' %}">
 
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
@@ -38,6 +39,7 @@
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/sweetalert2.all.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/first_health.js' %}"></script>
 
         {% block extra_js %}
