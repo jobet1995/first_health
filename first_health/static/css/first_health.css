@@ -1,0 +1,461 @@
+/* ============================================
+   First Health - Global Stylesheet
+   Tailwind CSS Integration
+   ============================================ */
+
+/* Tailwind CSS Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --------------------------------------------
+   Custom Properties (Aligned with Tailwind)
+   -------------------------------------------- */
+
+@layer base {
+    :root {
+        /* Color Palette - Medical Theme (HSL for easy manipulation) */
+        --color-primary: 199 89% 48%;
+        /* sky-500 - Medical Trust */
+        --color-primary-foreground: 0 0% 100%;
+
+        --color-secondary: 160 84% 39%;
+        /* emerald-600 - Health */
+        --color-secondary-foreground: 0 0% 100%;
+
+        --color-accent: 262 83% 58%;
+        /* purple-500 - Innovation */
+        --color-accent-foreground: 0 0% 100%;
+
+        --color-background: 0 0% 100%;
+        /* white */
+        --color-foreground: 222 47% 11%;
+        /* slate-900 */
+
+        --color-card: 210 40% 98%;
+        /* slate-50 */
+        --color-card-foreground: 222 47% 11%;
+
+        --color-muted: 210 40% 96%;
+        /* slate-100 */
+        --color-muted-foreground: 215 16% 47%;
+        /* slate-600 */
+
+        --color-border: 214 32% 91%;
+        /* slate-200 */
+        --color-input: 214 32% 91%;
+        --color-ring: 199 89% 48%;
+        /* primary */
+
+        /* Status Colors */
+        --color-success: 160 84% 39%;
+        /* emerald-600 */
+        --color-warning: 38 92% 50%;
+        /* orange-500 */
+        --color-error: 0 84% 60%;
+        /* red-500 */
+        --color-info: 217 91% 60%;
+        /* blue-500 */
+
+        /* Border Radius (aligned with Tailwind) */
+        --radius-sm: 0.125rem;
+        /* 2px */
+        --radius: 0.375rem;
+        /* 6px - default */
+        --radius-md: 0.375rem;
+        /* 6px */
+        --radius-lg: 0.5rem;
+        /* 8px */
+        --radius-xl: 0.75rem;
+        /* 12px */
+        --radius-2xl: 1rem;
+        /* 16px */
+        --radius-full: 9999px;
+    }
+
+    /* Dark Mode Theme */
+    .dark {
+        --color-background: 222 47% 11%;
+        /* slate-900 */
+        --color-foreground: 210 40% 98%;
+        /* slate-50 */
+
+        --color-card: 217 33% 17%;
+        /* slate-800 */
+        --color-card-foreground: 210 40% 98%;
+
+        --color-muted: 217 33% 17%;
+        /* slate-800 */
+        --color-muted-foreground: 215 20% 65%;
+        /* slate-400 */
+
+        --color-border: 215 28% 27%;
+        /* slate-700 */
+        --color-input: 215 28% 27%;
+
+        --color-primary: 199 89% 48%;
+        --color-secondary: 160 84% 39%;
+        --color-accent: 262 83% 58%;
+    }
+
+    /* Base Styles */
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-bold text-foreground;
+    }
+
+    h1 {
+        @apply text-5xl leading-tight;
+    }
+
+    h2 {
+        @apply text-4xl leading-tight;
+    }
+
+    h3 {
+        @apply text-3xl leading-snug;
+    }
+
+    h4 {
+        @apply text-2xl leading-snug;
+    }
+
+    h5 {
+        @apply text-xl leading-normal;
+    }
+
+    h6 {
+        @apply text-lg leading-normal;
+    }
+
+    p {
+        @apply text-muted-foreground leading-relaxed;
+    }
+
+    a {
+        @apply text-primary hover:text-primary/80 transition-colors;
+    }
+
+    code {
+        @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm text-accent;
+    }
+}
+
+/* --------------------------------------------
+   Custom Components (Tailwind @layer)
+   -------------------------------------------- */
+
+@layer components {
+
+    /* Container */
+    .container {
+        @apply mx-auto px-4 sm:px-6 lg:px-8;
+        max-width: 1280px;
+    }
+
+    /* Button Base */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    }
+
+    /* Button Variants */
+    .btn-primary {
+        @apply bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-md hover:-translate-y-0.5;
+    }
+
+    .btn-secondary {
+        @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 hover:shadow-md hover:-translate-y-0.5;
+    }
+
+    .btn-outline {
+        @apply border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground;
+    }
+
+    .btn-ghost {
+        @apply bg-transparent text-primary hover:bg-muted;
+    }
+
+    .btn-destructive {
+        @apply bg-red-500 text-white hover:bg-red-600;
+    }
+
+    /* Button Sizes */
+    .btn-sm {
+        @apply px-4 py-2 text-sm;
+    }
+
+    .btn-lg {
+        @apply px-8 py-4 text-lg;
+    }
+
+    /* Card Component */
+    .card {
+        @apply rounded-xl border bg-card text-card-foreground shadow-sm transition-all duration-200 hover:shadow-lg hover:-translate-y-1;
+    }
+
+    .card-header {
+        @apply flex flex-col space-y-1.5 p-6;
+    }
+
+    .card-title {
+        @apply text-2xl font-semibold leading-none tracking-tight;
+    }
+
+    .card-description {
+        @apply text-sm text-muted-foreground;
+    }
+
+    .card-content {
+        @apply p-6 pt-0;
+    }
+
+    .card-footer {
+        @apply flex items-center p-6 pt-0;
+    }
+
+    /* Form Elements */
+    .input {
+        @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+    }
+
+    .textarea {
+        @apply flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+    }
+
+    .label {
+        @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+    }
+
+    .form-group {
+        @apply mb-6 space-y-2;
+    }
+
+    /* Badge Component */
+    .badge {
+        @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors;
+    }
+
+    .badge-primary {
+        @apply bg-primary/10 text-primary;
+    }
+
+    .badge-secondary {
+        @apply bg-secondary/10 text-secondary;
+    }
+
+    .badge-success {
+        @apply bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400;
+    }
+
+    .badge-warning {
+        @apply bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400;
+    }
+
+    .badge-error {
+        @apply bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400;
+    }
+
+    .badge-outline {
+        @apply border border-current bg-transparent;
+    }
+
+    /* Alert Component */
+    .alert {
+        @apply relative w-full rounded-lg border p-4;
+    }
+
+    .alert-info {
+        @apply border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-800 dark:bg-blue-900/30 dark:text-blue-300;
+    }
+
+    .alert-success {
+        @apply border-green-200 bg-green-50 text-green-900 dark:border-green-800 dark:bg-green-900/30 dark:text-green-300;
+    }
+
+    .alert-warning {
+        @apply border-orange-200 bg-orange-50 text-orange-900 dark:border-orange-800 dark:bg-orange-900/30 dark:text-orange-300;
+    }
+
+    .alert-error {
+        @apply border-red-200 bg-red-50 text-red-900 dark:border-red-800 dark:bg-red-900/30 dark:text-red-300;
+    }
+
+    .alert-title {
+        @apply mb-1 font-medium leading-none tracking-tight;
+    }
+
+    .alert-description {
+        @apply text-sm opacity-90;
+    }
+}
+
+/* --------------------------------------------
+   Custom Utilities
+   -------------------------------------------- */
+
+@layer utilities {
+
+    /* Glassmorphism Effect */
+    .glass {
+        @apply bg-white/10 backdrop-blur-lg border border-white/20;
+    }
+
+    .glass-dark {
+        @apply bg-black/10 backdrop-blur-lg border border-white/10;
+    }
+
+    /* Medical Gradient Backgrounds */
+    .bg-gradient-primary {
+        @apply bg-gradient-to-r from-sky-400 to-blue-500;
+    }
+
+    .bg-gradient-secondary {
+        @apply bg-gradient-to-r from-emerald-400 to-green-500;
+    }
+
+    .bg-gradient-health {
+        @apply bg-gradient-to-br from-sky-400 via-emerald-400 to-blue-500;
+    }
+
+    /* Text Gradients */
+    .text-gradient-primary {
+        @apply bg-gradient-to-r from-sky-400 to-blue-600 bg-clip-text text-transparent;
+    }
+
+    .text-gradient-health {
+        @apply bg-gradient-to-r from-sky-500 via-emerald-500 to-blue-600 bg-clip-text text-transparent;
+    }
+
+    /* Smooth Transitions */
+    .transition-smooth {
+        @apply transition-all duration-300 ease-in-out;
+    }
+
+    /* Focus Visible Ring */
+    .focus-ring {
+        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+    }
+
+    /* Scrollbar Styling */
+    .scrollbar-thin {
+        scrollbar-width: thin;
+        scrollbar-color: hsl(var(--color-muted)) transparent;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+        @apply bg-muted rounded-full;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        @apply bg-muted-foreground/30;
+    }
+}
+
+/* --------------------------------------------
+   Animations
+   -------------------------------------------- */
+
+@layer utilities {
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slide-up {
+        from {
+            opacity: 0;
+            transform: translateY(1rem);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slide-down {
+        from {
+            opacity: 0;
+            transform: translateY(-1rem);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse-slow {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.3s ease-in-out;
+    }
+
+    .animate-slide-up {
+        animation: slide-up 0.5s ease-out;
+    }
+
+    .animate-slide-down {
+        animation: slide-down 0.5s ease-out;
+    }
+
+    .animate-pulse-slow {
+        animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+}
+
+/* --------------------------------------------
+   Print Styles
+   -------------------------------------------- */
+
+@media print {
+    @page {
+        margin: 2cm;
+    }
+
+    body {
+        @apply text-black bg-white;
+    }
+
+    .no-print {
+        @apply hidden;
+    }
+}

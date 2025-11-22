@@ -1,0 +1,61 @@
+{
+    "compilerOptions": {
+        // Language and Environment
+        "target": "ES2020",
+        "lib": [
+            "ES2020",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "module": "ESNext",
+        "jsx": "preserve",
+        // Module Resolution
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "allowImportingTsExtensions": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        // Type Checking
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true,
+        "skipLibCheck": true,
+        // Emit
+        "noEmit": true,
+        "isolatedModules": true,
+        // Interop Constraints
+        "forceConsistentCasingInFileNames": true,
+        // Path Mapping - matches vite.config.ts aliases
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "./static/src/*"
+            ],
+            "@components/*": [
+                "./static/src/components/*"
+            ],
+            "@styles/*": [
+                "./static/src/styles/*"
+            ],
+            "@utils/*": [
+                "./static/src/utils/*"
+            ]
+        },
+        // Advanced
+        "composite": true,
+        "moduleDetection": "force"
+    },
+    "include": [
+        "static/src/**/*.ts",
+        "static/src/**/*.tsx",
+        "static/src/**/*.d.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "static/dist",
+        "**/*.spec.ts",
+        "**/*.test.ts"
+    ]
+}
